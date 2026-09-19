@@ -449,9 +449,8 @@ footer small{
       </form>
 
       <div id="sucessoProfissional" class="success">
-        ✅ Cadastro preenchido com sucesso!
-        Agora vamos conectar essa etapa a um sistema para receber
-        os cadastros de verdade.
+        ✅ Cadastro enviado com sucesso!
+        Seus dados foram registrados no Deu Jeito.
       </div>
 
       <div class="note">
@@ -537,9 +536,8 @@ footer small{
       </form>
 
       <div id="sucessoCliente" class="success">
-        ✅ Solicitação preenchida com sucesso!
-        Agora vamos conectar essa etapa a um sistema para receber
-        as solicitações de verdade.
+        ✅ Solicitação enviada com sucesso!
+        Seus dados foram registrados no Deu Jeito.
       </div>
 
       <div class="note">
@@ -571,24 +569,75 @@ footer small{
 
 <script>
 
-document.getElementById("formProfissional").addEventListener("submit", function(event){
+const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbw8JSupSP5wxJkOre416g-XtoZvPhi8STV93FBpBrl_-ONnl8ygTxTW_etST8BoyQos/exec";
+
+
+document.getElementById("formProfissional").addEventListener("submit", async function(event){
 
   event.preventDefault();
 
-  document.getElementById("sucessoProfissional").style.display = "block";
+  const dados = {
+    tipo: "PROFISSIONAL",
+    nome: document.getElementById("profNome").value,
+    whatsapp: document.getElementById("profWhats").value,
+    cidade: document.getElementById("profCidade").value,
+    bairro: document.getElementById("profBairro").value,
+    servico: document.getElementById("profServico").value,
+    descricao: document.getElementById("profDescricao").value
+  };
 
-  this.reset();
+  try {
+
+    await fetch(URL_APPS_SCRIPT, {
+      method: "POST",
+      mode: "no-cors",
+      body: JSON.stringify(dados)
+    });
+
+    document.getElementById("sucessoProfissional").style.display = "block";
+
+    this.reset();
+
+  } catch (erro) {
+
+    alert("Não foi possível enviar o cadastro. Tente novamente.");
+
+  }
 
 });
 
 
-document.getElementById("formCliente").addEventListener("submit", function(event){
+document.getElementById("formCliente").addEventListener("submit", async function(event){
 
   event.preventDefault();
 
-  document.getElementById("sucessoCliente").style.display = "block";
+  const dados = {
+    tipo: "CLIENTE",
+    nome: document.getElementById("cliNome").value,
+    whatsapp: document.getElementById("cliWhats").value,
+    cidade: document.getElementById("cliCidade").value,
+    bairro: document.getElementById("cliBairro").value,
+    servico: document.getElementById("cliServico").value,
+    descricao: document.getElementById("cliDescricao").value
+  };
 
-  this.reset();
+  try {
+
+    await fetch(URL_APPS_SCRIPT, {
+      method: "POST",
+      mode: "no-cors",
+      body: JSON.stringify(dados)
+    });
+
+    document.getElementById("sucessoCliente").style.display = "block";
+
+    this.reset();
+
+  } catch (erro) {
+
+    alert("Não foi possível enviar a solicitação. Tente novamente.");
+
+  }
 
 });
 
