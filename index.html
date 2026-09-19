@@ -239,6 +239,49 @@ form .btn{
   font-weight:700;
 }
 
+/* NOVA ÁREA: ENCONTRAR PROFISSIONAIS */
+
+.profissionais-box{
+  margin-top:25px;
+}
+
+.profissional-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:20px;
+  margin-top:14px;
+}
+
+.profissional-card h3{
+  margin:0 0 8px;
+  color:var(--g);
+}
+
+.profissional-card p{
+  margin:6px 0;
+  color:#5e6c66;
+}
+
+.whatsapp{
+  display:inline-block;
+  margin-top:12px;
+  padding:11px 16px;
+  background:var(--g);
+  color:#fff;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:800;
+}
+
+.resultado-vazio{
+  background:#f1f4f2;
+  padding:15px;
+  border-radius:12px;
+  color:#65726d;
+  margin-top:15px;
+}
+
 footer{
   background:#15211d;
   color:#fff;
@@ -372,6 +415,51 @@ footer small{
       <span class="tag">Cuidador</span>
       <span class="tag">Fotógrafo</span>
       <span class="tag">Outros</span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- NOVA ÁREA -->
+
+<section id="buscar">
+  <div class="wrap">
+
+    <div class="box">
+
+      <h2 class="title">
+        🔎 Encontre um profissional
+      </h2>
+
+      <p class="sub">
+        Procure profissionais cadastrados no Deu Jeito.
+      </p>
+
+      <label for="buscaCidade">Cidade</label>
+      <input
+        id="buscaCidade"
+        type="text"
+        placeholder="Ex.: Timóteo"
+      >
+
+      <label for="buscaServico">Qual serviço você procura?</label>
+      <input
+        id="buscaServico"
+        type="text"
+        placeholder="Ex.: pedreiro"
+      >
+
+      <button
+        type="button"
+        class="btn primary"
+        onclick="buscarProfissionais()"
+      >
+        🔎 Procurar profissionais
+      </button>
+
+      <div id="resultadoProfissionais" class="profissionais-box"></div>
+
     </div>
 
   </div>
@@ -572,6 +660,8 @@ footer small{
 const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbw8JSupSP5wxJkOre416g-XtoZvPhi8STV93FBpBrl_-ONnl8ygTxTW_etST8BoyQos/exec";
 
 
+/* CADASTRO PROFISSIONAL */
+
 document.getElementById("formProfissional").addEventListener("submit", async function(event){
 
   event.preventDefault();
@@ -607,6 +697,8 @@ document.getElementById("formProfissional").addEventListener("submit", async fun
 });
 
 
+/* CADASTRO CLIENTE */
+
 document.getElementById("formCliente").addEventListener("submit", async function(event){
 
   event.preventDefault();
@@ -640,6 +732,93 @@ document.getElementById("formCliente").addEventListener("submit", async function
   }
 
 });
+
+
+/* BUSCAR PROFISSIONAIS */
+
+async function buscarProfissionais(){
+
+  const cidade = document.getElementById("buscaCidade").value.trim();
+  const servico = document.getElementById("buscaServico").value.trim();
+
+  const resultado = document.getElementById("resultadoProfissionais");
+
+  if(!cidade && !servico){
+    resultado.innerHTML =
+      '<div class="resultado-vazio">Digite uma cidade ou um serviço para pesquisar.</div>';
+    return;
+  }
+
+  resultado.innerHTML =
+    '<div class="resultado-vazio">🔎 Procurando profissionais...</div>';
+
+  try{
+
+    const resposta = await fetch(
+      URL_APPS_SCRIPT +
+      "?acao=buscar" +
+      "&cidade=" + encodeURIComponent(cidade) +
+      "&servico=" + encodeURIComponent(servico)
+    );
+
+    const profissionais = await resposta.json();
+
+    if(!profissionais.length){
+
+      resultado.innerHTML =
+        '<div class="resultado-vazio">😕 Nenhum profissional encontrado com esses dados.</div>';
+
+      return;
+    }
+
+    resultado.innerHTML = "";
+
+    profissionais.forEach(function(prof){
+
+      const card = document.createElement("div");
+
+      card.className = "profissional-card";
+
+      const whatsappLimpo =
+        String(prof.whatsapp || "").replace(/\D/g,"");
+
+      const numero =
+        whatsappLimpo.startsWith("55")
+        ? whatsappLimpo
+        : "55" + whatsappLimpo;
+
+      card.innerHTML = `
+        <h3>👷 ${prof.nome || "Profissional"}</h3>
+
+        <p><strong>🛠️ Serviço:</strong> ${prof.servico || ""}</p>
+
+        <p><strong>📍 Cidade:</strong> ${prof.cidade || ""}</p>
+
+        <p><strong>🏘️ Bairro:</strong> ${prof.bairro || "Não informado"}</p>
+
+        <p>${prof.descricao || ""}</p>
+
+        <a
+          class="whatsapp"
+          href="https://wa.me/${numero}"
+          target="_blank"
+        >
+          💬 Falar pelo WhatsApp
+        </a>
+      `;
+
+      resultado.appendChild(card);
+
+    });
+
+  }catch(erro){
+
+    resultado.innerHTML =
+      '<div class="resultado-vazio">⚠️ Não foi possível realizar a pesquisa agora.</div>';
+
+  }
+
+}
 
 </script>
 
