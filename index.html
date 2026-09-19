@@ -239,8 +239,6 @@ form .btn{
   font-weight:700;
 }
 
-/* NOVA ÁREA: ENCONTRAR PROFISSIONAIS */
-
 .profissionais-box{
   margin-top:25px;
 }
@@ -352,7 +350,6 @@ footer small{
   </div>
 </section>
 
-
 <section>
   <div class="wrap">
 
@@ -392,7 +389,6 @@ footer small{
   </div>
 </section>
 
-
 <section>
   <div class="wrap">
 
@@ -419,9 +415,6 @@ footer small{
 
   </div>
 </section>
-
-
-<!-- NOVA ÁREA -->
 
 <section id="buscar">
   <div class="wrap">
@@ -464,7 +457,6 @@ footer small{
 
   </div>
 </section>
-
 
 <section id="profissional">
   <div class="wrap">
@@ -550,7 +542,6 @@ footer small{
 
   </div>
 </section>
-
 
 <section id="cliente">
   <div class="wrap">
@@ -639,7 +630,6 @@ footer small{
 
 </main>
 
-
 <footer>
   <div class="wrap">
 
@@ -654,10 +644,10 @@ footer small{
   </div>
 </footer>
 
-
 <script>
 
-const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbw8JSupSP5wxJkOre416g-XtoZvPhi8STV93FBpBrl_-ONnl8ygTxTW_etST8BoyQos/exec";
+/* VERSÃO 7 DA IMPLANTAÇÃO */
+const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbx7yCVA3WfmjckTHnUu0QicJaEw5oPiziQsTpRTiH6d6LZsrl7MNT7S9jFCNFqy97Mb/exec";
 
 
 /* CADASTRO PROFISSIONAL */
@@ -744,8 +734,10 @@ async function buscarProfissionais(){
   const resultado = document.getElementById("resultadoProfissionais");
 
   if(!cidade && !servico){
+
     resultado.innerHTML =
       '<div class="resultado-vazio">Digite uma cidade ou um serviço para pesquisar.</div>';
+
     return;
   }
 
@@ -760,6 +752,10 @@ async function buscarProfissionais(){
       "&cidade=" + encodeURIComponent(cidade) +
       "&servico=" + encodeURIComponent(servico)
     );
+
+    if(!resposta.ok){
+      throw new Error("Erro na resposta do servidor");
+    }
 
     const profissionais = await resposta.json();
 
@@ -812,6 +808,8 @@ async function buscarProfissionais(){
     });
 
   }catch(erro){
+
+    console.error(erro);
 
     resultado.innerHTML =
       '<div class="resultado-vazio">⚠️ Não foi possível realizar a pesquisa agora.</div>';
