@@ -1,18 +1,598 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>Deu Jeito — Encontre quem dá jeito</title>
+
 <style>
-:root{--g:#087a52;--dark:#15211d;--bg:#f6f8f7;--card:#fff;--line:#dfe7e3;--yellow:#f2bd3f}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:var(--dark);background:var(--bg)}.wrap{max-width:1050px;margin:auto;padding:0 20px}header{background:#fff;border-bottom:1px solid var(--line)}.nav{height:68px;display:flex;align-items:center;justify-content:space-between}.logo{font-size:28px;font-weight:900;color:var(--g)}.logo b{color:var(--yellow)}.hero{padding:70px 0 55px;background:#edf8f3}.badge{display:inline-block;background:#fff4cf;border:1px solid #efd58a;border-radius:99px;padding:7px 12px;font-size:13px;font-weight:800}.hero h1{font-size:clamp(40px,7vw,68px);line-height:.98;letter-spacing:-2px;max-width:760px;margin:20px 0 15px}.hero p{font-size:19px;color:#5e6c66;max-width:650px}.buttons{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:680px;margin-top:28px}.btn{display:block;text-align:center;padding:17px;border-radius:13px;font-weight:900;font-size:16px}.primary{background:var(--g);color:#fff}.secondary{background:#fff;color:var(--g);border:2px solid var(--g)}section{padding:48px 0}.title{font-size:31px;margin:0 0 8px}.sub{color:#65726d;margin:0 0 24px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}.card .ico{font-size:30px}.card h3{margin:10px 0 6px}.card p{margin:0;color:#65726d}.tags{display:flex;flex-wrap:wrap;gap:9px}.tag{background:#fff;border:1px solid var(--line);padding:9px 13px;border-radius:99px;font-weight:700}.box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:25px}.note{font-size:13px;color:#68756f;background:#f1f4f2;padding:11px;border-radius:10px;margin-top:12px}footer{background:#15211d;color:#fff;padding:30px 0}footer small{color:#bdc9c4}@media(max-width:700px){.buttons,.grid{grid-template-columns:1fr}.hero{padding-top:48px}.hero h1{letter-spacing:-1px}}
-</style></head>
+:root{
+  --g:#087a52;
+  --dark:#15211d;
+  --bg:#f6f8f7;
+  --card:#fff;
+  --line:#dfe7e3;
+  --yellow:#f2bd3f;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  color:var(--dark);
+  background:var(--bg);
+}
+
+.wrap{
+  max-width:1050px;
+  margin:auto;
+  padding:0 20px;
+}
+
+header{
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  min-height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.logo{
+  font-size:28px;
+  font-weight:900;
+  color:var(--g);
+}
+
+.logo b{
+  color:var(--yellow);
+}
+
+.nav span{
+  color:#65726d;
+  font-size:14px;
+}
+
+.hero{
+  padding:70px 0 55px;
+  background:#edf8f3;
+}
+
+.badge{
+  display:inline-block;
+  background:#fff4cf;
+  border:1px solid #efd58a;
+  border-radius:99px;
+  padding:7px 12px;
+  font-size:13px;
+  font-weight:800;
+}
+
+.hero h1{
+  font-size:clamp(40px,7vw,68px);
+  line-height:.98;
+  letter-spacing:-2px;
+  max-width:760px;
+  margin:20px 0 15px;
+}
+
+.hero p{
+  font-size:19px;
+  color:#5e6c66;
+  max-width:650px;
+}
+
+.buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  max-width:680px;
+  margin-top:28px;
+}
+
+.btn{
+  display:block;
+  width:100%;
+  text-align:center;
+  padding:17px;
+  border-radius:13px;
+  font-weight:900;
+  font-size:16px;
+  border:0;
+  cursor:pointer;
+}
+
+.primary{
+  background:var(--g);
+  color:#fff;
+}
+
+.secondary{
+  background:#fff;
+  color:var(--g);
+  border:2px solid var(--g);
+}
+
+section{
+  padding:48px 0;
+}
+
+.title{
+  font-size:31px;
+  margin:0 0 8px;
+}
+
+.sub{
+  color:#65726d;
+  margin:0 0 24px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:22px;
+}
+
+.card .ico{
+  font-size:30px;
+}
+
+.card h3{
+  margin:10px 0 6px;
+}
+
+.card p{
+  margin:0;
+  color:#65726d;
+}
+
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+}
+
+.tag{
+  background:#fff;
+  border:1px solid var(--line);
+  padding:9px 13px;
+  border-radius:99px;
+  font-weight:700;
+}
+
+.box{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:25px;
+}
+
+form{
+  margin-top:25px;
+}
+
+label{
+  display:block;
+  font-weight:800;
+  margin:16px 0 7px;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  font-family:Arial,sans-serif;
+  font-size:16px;
+  background:#fff;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  outline:2px solid #b8dfd0;
+  border-color:var(--g);
+}
+
+textarea{
+  resize:vertical;
+}
+
+form .btn{
+  margin-top:20px;
+}
+
+.note{
+  font-size:13px;
+  color:#68756f;
+  background:#f1f4f2;
+  padding:11px;
+  border-radius:10px;
+  margin-top:12px;
+}
+
+.success{
+  display:none;
+  margin-top:18px;
+  padding:15px;
+  border-radius:12px;
+  background:#e5f7ee;
+  border:1px solid #a9dcc5;
+  color:#126345;
+  font-weight:700;
+}
+
+footer{
+  background:#15211d;
+  color:#fff;
+  padding:30px 0;
+}
+
+footer small{
+  color:#bdc9c4;
+}
+
+@media(max-width:700px){
+  .buttons,
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+    padding-top:48px;
+  }
+
+  .hero h1{
+    letter-spacing:-1px;
+  }
+
+  .nav{
+    align-items:flex-start;
+    flex-direction:column;
+    padding-top:18px;
+    padding-bottom:18px;
+  }
+}
+</style>
+</head>
+
 <body>
-<header><div class="wrap nav"><div class="logo">Deu<b>Jeito</b></div><span>Uma rede brasileira de serviços</span></div></header>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo">Deu<b>Jeito</b></div>
+    <span>Uma rede brasileira de serviços</span>
+  </div>
+</header>
+
 <main>
-<section class="hero"><div class="wrap"><span class="badge">🚀 LANÇAMENTO</span><h1>Precisou de um serviço? Encontre quem dá jeito.</h1><p>O Deu Jeito conecta quem precisa de um serviço com quem sabe fazer.</p><div class="buttons"><a class="btn primary" href="#profissional">👷 Sou profissional</a><a class="btn secondary" href="#cliente">🔎 Preciso de um serviço</a></div></div></section>
-<section><div class="wrap"><h2 class="title">Como funciona</h2><p class="sub">Simples: aproximar problema e solução.</p><div class="grid"><div class="card"><div class="ico">📍</div><h3>1. Informe sua região</h3><p>Digite sua cidade e o serviço que procura ou oferece.</p></div><div class="card"><div class="ico">🛠️</div><h3>2. Encontre quem faz</h3><p>Veja profissionais compatíveis com a necessidade.</p></div><div class="card"><div class="ico">🤝</div><h3>3. Deu Jeito!</h3><p>As duas pontas entram em contato e o serviço pode acontecer.</p></div></div></div></section>
-<section><div class="wrap"><h2 class="title">Serviços</h2><p class="sub">Começamos com os serviços mais procurados.</p><div class="tags"><span class="tag">Pedreiro</span><span class="tag">Eletricista</span><span class="tag">Pintor</span><span class="tag">Diarista</span><span class="tag">Jardineiro</span><span class="tag">Freteiro</span><span class="tag">Montador</span><span class="tag">Técnico</span><span class="tag">Manicure</span><span class="tag">Cuidador</span><span class="tag">Fotógrafo</span><span class="tag">Outros</span></div></div></section>
-<section id="profissional"><div class="wrap"><div class="box"><h2 class="title">👷 Quero oferecer meus serviços</h2><p class="sub">Na versão inicial, o cadastro será gratuito.</p><div class="note">Próxima etapa: conectar este botão a um formulário gratuito e começar a formar nossa primeira rede de profissionais.</div></div></div></section>
-<section id="cliente"><div class="wrap"><div class="box"><h2 class="title">🔎 Preciso de um serviço</h2><p class="sub">Na versão inicial, o cliente também poderá solicitar gratuitamente.</p><div class="note">Próxima etapa: criar o cadastro da necessidade e conectar com profissionais da região.</div></div></div></section>
-</main><footer><div class="wrap"><div class="logo" style="color:#fff">Deu<b>Jeito</b></div><small>Precisou de um serviço? Encontre quem dá jeito.</small></div></footer>
-</body></html>
+
+<section class="hero">
+  <div class="wrap">
+
+    <span class="badge">🚀 LANÇAMENTO</span>
+
+    <h1>Precisou de um serviço? Encontre quem dá jeito.</h1>
+
+    <p>
+      O Deu Jeito conecta quem precisa de um serviço
+      com quem sabe fazer.
+    </p>
+
+    <div class="buttons">
+      <a class="btn primary" href="#profissional">
+        👷 Sou profissional
+      </a>
+
+      <a class="btn secondary" href="#cliente">
+        🔎 Preciso de um serviço
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<section>
+  <div class="wrap">
+
+    <h2 class="title">Como funciona</h2>
+
+    <p class="sub">
+      Simples: aproximar problema e solução.
+    </p>
+
+    <div class="grid">
+
+      <div class="card">
+        <div class="ico">📍</div>
+        <h3>1. Informe sua região</h3>
+        <p>
+          Digite sua cidade e o serviço que procura ou oferece.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="ico">🛠️</div>
+        <h3>2. Encontre quem faz</h3>
+        <p>
+          Veja profissionais compatíveis com a necessidade.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="ico">🤝</div>
+        <h3>3. Deu Jeito!</h3>
+        <p>
+          As duas pontas entram em contato e o serviço pode acontecer.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <div class="wrap">
+
+    <h2 class="title">Serviços</h2>
+
+    <p class="sub">
+      Começamos com os serviços mais procurados.
+    </p>
+
+    <div class="tags">
+      <span class="tag">Pedreiro</span>
+      <span class="tag">Eletricista</span>
+      <span class="tag">Pintor</span>
+      <span class="tag">Diarista</span>
+      <span class="tag">Jardineiro</span>
+      <span class="tag">Freteiro</span>
+      <span class="tag">Montador</span>
+      <span class="tag">Técnico</span>
+      <span class="tag">Manicure</span>
+      <span class="tag">Cuidador</span>
+      <span class="tag">Fotógrafo</span>
+      <span class="tag">Outros</span>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="profissional">
+  <div class="wrap">
+
+    <div class="box">
+
+      <h2 class="title">
+        👷 Quero oferecer meus serviços
+      </h2>
+
+      <p class="sub">
+        Cadastre-se gratuitamente para fazer parte do Deu Jeito.
+      </p>
+
+      <form id="formProfissional">
+
+        <label for="profNome">Nome</label>
+        <input
+          id="profNome"
+          type="text"
+          placeholder="Seu nome"
+          required
+        >
+
+        <label for="profWhats">WhatsApp</label>
+        <input
+          id="profWhats"
+          type="tel"
+          placeholder="(31) 99999-9999"
+          required
+        >
+
+        <label for="profCidade">Cidade</label>
+        <input
+          id="profCidade"
+          type="text"
+          placeholder="Sua cidade"
+          required
+        >
+
+        <label for="profBairro">Bairro</label>
+        <input
+          id="profBairro"
+          type="text"
+          placeholder="Seu bairro"
+        >
+
+        <label for="profServico">Serviço que oferece</label>
+        <input
+          id="profServico"
+          type="text"
+          placeholder="Ex.: Pedreiro, eletricista, pintor..."
+          required
+        >
+
+        <label for="profDescricao">
+          Fale um pouco sobre seu serviço
+        </label>
+
+        <textarea
+          id="profDescricao"
+          rows="4"
+          placeholder="Conte brevemente o que você faz"
+        ></textarea>
+
+        <button type="submit" class="btn primary">
+          🚀 Quero me cadastrar
+        </button>
+
+      </form>
+
+      <div id="sucessoProfissional" class="success">
+        ✅ Cadastro preenchido com sucesso!
+        Agora vamos conectar essa etapa a um sistema para receber
+        os cadastros de verdade.
+      </div>
+
+      <div class="note">
+        Cadastro gratuito. Nesta primeira versão estamos preparando
+        a estrutura da plataforma.
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section id="cliente">
+  <div class="wrap">
+
+    <div class="box">
+
+      <h2 class="title">
+        🔎 Preciso de um serviço
+      </h2>
+
+      <p class="sub">
+        Conte o que você precisa e ajude o Deu Jeito a encontrar
+        uma solução.
+      </p>
+
+      <form id="formCliente">
+
+        <label for="cliNome">Nome</label>
+        <input
+          id="cliNome"
+          type="text"
+          placeholder="Seu nome"
+          required
+        >
+
+        <label for="cliWhats">WhatsApp</label>
+        <input
+          id="cliWhats"
+          type="tel"
+          placeholder="(31) 99999-9999"
+          required
+        >
+
+        <label for="cliCidade">Cidade</label>
+        <input
+          id="cliCidade"
+          type="text"
+          placeholder="Sua cidade"
+          required
+        >
+
+        <label for="cliBairro">Bairro</label>
+        <input
+          id="cliBairro"
+          type="text"
+          placeholder="Seu bairro"
+        >
+
+        <label for="cliServico">Qual serviço você precisa?</label>
+        <input
+          id="cliServico"
+          type="text"
+          placeholder="Ex.: consertar torneira, pintar casa..."
+          required
+        >
+
+        <label for="cliDescricao">
+          Explique o que você precisa
+        </label>
+
+        <textarea
+          id="cliDescricao"
+          rows="4"
+          placeholder="Descreva brevemente o serviço"
+        ></textarea>
+
+        <button type="submit" class="btn primary">
+          🔎 Solicitar serviço
+        </button>
+
+      </form>
+
+      <div id="sucessoCliente" class="success">
+        ✅ Solicitação preenchida com sucesso!
+        Agora vamos conectar essa etapa a um sistema para receber
+        as solicitações de verdade.
+      </div>
+
+      <div class="note">
+        Solicitação gratuita na fase inicial do Deu Jeito.
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+
+<footer>
+  <div class="wrap">
+
+    <div class="logo" style="color:#fff">
+      Deu<b>Jeito</b>
+    </div>
+
+    <small>
+      Precisou de um serviço? Encontre quem dá jeito.
+    </small>
+
+  </div>
+</footer>
+
+
+<script>
+
+document.getElementById("formProfissional").addEventListener("submit", function(event){
+
+  event.preventDefault();
+
+  document.getElementById("sucessoProfissional").style.display = "block";
+
+  this.reset();
+
+});
+
+
+document.getElementById("formCliente").addEventListener("submit", function(event){
+
+  event.preventDefault();
+
+  document.getElementById("sucessoCliente").style.display = "block";
+
+  this.reset();
+
+});
+
+</script>
+
+</body>
+</html>
