@@ -709,6 +709,7 @@ footer small{
         ></textarea>
 
         <button
+          id="btnCadastro"
           type="submit"
           class="btn primary"
         >
@@ -788,6 +789,11 @@ function selecionarServico(servico){
 }
 
 
+/* CONTROLE DE DUPLICIDADE */
+
+let enviandoCadastro = false;
+
+
 document
 .getElementById("formProfissional")
 .addEventListener(
@@ -796,6 +802,32 @@ document
 
     event.preventDefault();
 
+
+    /*
+      Se já existe um envio em andamento,
+      simplesmente ignora novos cliques.
+    */
+
+    if(enviandoCadastro){
+
+      return;
+
+    }
+
+
+    enviandoCadastro = true;
+
+
+    const botao =
+    document.getElementById("btnCadastro");
+
+
+    botao.disabled = true;
+
+    botao.textContent =
+    "⏳ Enviando cadastro...";
+
+
     const dados = {
 
       tipo:"PROFISSIONAL",
@@ -803,32 +835,38 @@ document
       nome:
       document
       .getElementById("profNome")
-      .value,
+      .value
+      .trim(),
 
       whatsapp:
       document
       .getElementById("profWhats")
-      .value,
+      .value
+      .trim(),
 
       cidade:
       document
       .getElementById("profCidade")
-      .value,
+      .value
+      .trim(),
 
       bairro:
       document
       .getElementById("profBairro")
-      .value,
+      .value
+      .trim(),
 
       servico:
       document
       .getElementById("profServico")
-      .value,
+      .value
+      .trim(),
 
       descricao:
       document
       .getElementById("profDescricao")
       .value
+      .trim()
 
     };
 
@@ -853,11 +891,28 @@ document
       this.reset();
 
 
+      botao.textContent =
+      "✅ Cadastro enviado";
+
+
     }catch(erro){
 
       alert(
         "Não foi possível enviar o cadastro. Tente novamente."
       );
+
+
+      /*
+        Se houver erro real no envio,
+        liberamos novamente o formulário.
+      */
+
+      enviandoCadastro = false;
+
+      botao.disabled = false;
+
+      botao.textContent =
+      "🚀 Quero me cadastrar";
 
     }
 
