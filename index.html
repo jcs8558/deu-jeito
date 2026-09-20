@@ -121,6 +121,12 @@ header{
   border:2px solid var(--g);
 }
 
+.danger{
+  background:#fff;
+  color:#a33a3a;
+  border:2px solid #d99a9a;
+}
+
 section{
   padding:48px 0;
 }
@@ -173,6 +179,15 @@ section{
   padding:9px 13px;
   border-radius:99px;
   font-weight:700;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.tag:hover{
+  background:#edf8f3;
+  border-color:var(--g);
+  color:var(--g);
+  transform:translateY(-1px);
 }
 
 .box{
@@ -239,6 +254,12 @@ form .btn{
   font-weight:700;
 }
 
+.cancel-success{
+  background:#fff4e5;
+  border-color:#efd29a;
+  color:#795514;
+}
+
 .profissionais-box{
   margin-top:25px;
 }
@@ -278,6 +299,12 @@ form .btn{
   border-radius:12px;
   color:#65726d;
   margin-top:15px;
+}
+
+.cancelamento{
+  margin-top:25px;
+  padding-top:25px;
+  border-top:1px solid var(--line);
 }
 
 footer{
@@ -338,13 +365,15 @@ footer small{
     </p>
 
     <div class="buttons">
+
       <a class="btn primary" href="#profissional">
         👷 Sou profissional
       </a>
 
-      <a class="btn secondary" href="#cliente">
+      <a class="btn secondary" href="#buscar">
         🔎 Preciso de um serviço
       </a>
+
     </div>
 
   </div>
@@ -395,22 +424,59 @@ footer small{
     <h2 class="title">Serviços</h2>
 
     <p class="sub">
-      Começamos com os serviços mais procurados.
+      Clique em uma profissão para encontrar profissionais cadastrados.
     </p>
 
     <div class="tags">
-      <span class="tag">Pedreiro</span>
-      <span class="tag">Eletricista</span>
-      <span class="tag">Pintor</span>
-      <span class="tag">Diarista</span>
-      <span class="tag">Jardineiro</span>
-      <span class="tag">Freteiro</span>
-      <span class="tag">Montador</span>
-      <span class="tag">Técnico</span>
-      <span class="tag">Manicure</span>
-      <span class="tag">Cuidador</span>
-      <span class="tag">Fotógrafo</span>
-      <span class="tag">Outros</span>
+
+      <button class="tag" type="button" onclick="selecionarServico('Pedreiro')">
+        Pedreiro
+      </button>
+
+      <button class="tag" type="button" onclick="selecionarServico('Eletricista')">
+        Eletricista
+      </button>
+
+      <button class="tag" type="button" onclick="selecionarServico('Pintor')">
+        Pintor
+      </button>
+
+      <button class="tag" type="button" onclick="selecionarServico('Diarista')">
+        Diarista
+      </button>
+
+      <button class="tag" type="button" onclick="selecionarServico('Jardineiro')">
+        Jardineiro
+      </button>
+
+      <button class="tag" type="button" onclick="selecionarServico('Freteiro')">
+        Freteiro
+      </button>
+
+      <button class="tag" type="button" onclick="selecionarServico('Montador')">
+        Montador
+      </button>
+
+      <button class="tag" type="button" onclick="selecionarServico('Técnico')">
+        Técnico
+      </button>
+
+      <button class="tag" type="button" onclick="selecionarServico('Manicure')">
+        Manicure
+      </button>
+
+      <button class="tag" type="button" onclick="selecionarServico('Cuidador')">
+        Cuidador
+      </button>
+
+      <button class="tag" type="button" onclick="selecionarServico('Fotógrafo')">
+        Fotógrafo
+      </button>
+
+      <button class="tag" type="button" onclick="selecionarServico('Outros')">
+        Outros
+      </button>
+
     </div>
 
   </div>
@@ -430,13 +496,17 @@ footer small{
       </p>
 
       <label for="buscaCidade">Cidade</label>
+
       <input
         id="buscaCidade"
         type="text"
         placeholder="Ex.: Timóteo"
       >
 
-      <label for="buscaServico">Qual serviço você procura?</label>
+      <label for="buscaServico">
+        Qual serviço você procura?
+      </label>
+
       <input
         id="buscaServico"
         type="text"
@@ -474,6 +544,7 @@ footer small{
       <form id="formProfissional">
 
         <label for="profNome">Nome</label>
+
         <input
           id="profNome"
           type="text"
@@ -482,6 +553,7 @@ footer small{
         >
 
         <label for="profWhats">WhatsApp</label>
+
         <input
           id="profWhats"
           type="tel"
@@ -490,6 +562,7 @@ footer small{
         >
 
         <label for="profCidade">Cidade</label>
+
         <input
           id="profCidade"
           type="text"
@@ -498,13 +571,17 @@ footer small{
         >
 
         <label for="profBairro">Bairro</label>
+
         <input
           id="profBairro"
           type="text"
           placeholder="Seu bairro"
         >
 
-        <label for="profServico">Serviço que oferece</label>
+        <label for="profServico">
+          Serviço que oferece
+        </label>
+
         <input
           id="profServico"
           type="text"
@@ -538,6 +615,57 @@ footer small{
         a estrutura da plataforma.
       </div>
 
+      <!-- CANCELAMENTO -->
+
+      <div class="cancelamento">
+
+        <h3>🚫 Quero cancelar meu perfil</h3>
+
+        <p class="sub">
+          Se você não quiser mais aparecer nas buscas do Deu Jeito,
+          solicite aqui a desativação do seu perfil.
+        </p>
+
+        <form id="formCancelamento">
+
+          <label for="cancelNome">
+            Nome usado no cadastro
+          </label>
+
+          <input
+            id="cancelNome"
+            type="text"
+            placeholder="Seu nome"
+            required
+          >
+
+          <label for="cancelWhats">
+            WhatsApp usado no cadastro
+          </label>
+
+          <input
+            id="cancelWhats"
+            type="tel"
+            placeholder="(31) 99999-9999"
+            required
+          >
+
+          <button type="submit" class="btn danger">
+            🚫 Quero cancelar meu perfil
+          </button>
+
+        </form>
+
+        <div id="sucessoCancelamento"
+             class="success cancel-success">
+
+          ✅ Solicitação processada.
+          Seu perfil foi retirado das buscas do Deu Jeito.
+
+        </div>
+
+      </div>
+
     </div>
 
   </div>
@@ -560,6 +688,7 @@ footer small{
       <form id="formCliente">
 
         <label for="cliNome">Nome</label>
+
         <input
           id="cliNome"
           type="text"
@@ -568,6 +697,7 @@ footer small{
         >
 
         <label for="cliWhats">WhatsApp</label>
+
         <input
           id="cliWhats"
           type="tel"
@@ -576,6 +706,7 @@ footer small{
         >
 
         <label for="cliCidade">Cidade</label>
+
         <input
           id="cliCidade"
           type="text"
@@ -584,13 +715,17 @@ footer small{
         >
 
         <label for="cliBairro">Bairro</label>
+
         <input
           id="cliBairro"
           type="text"
           placeholder="Seu bairro"
         >
 
-        <label for="cliServico">Qual serviço você precisa?</label>
+        <label for="cliServico">
+          Qual serviço você precisa?
+        </label>
+
         <input
           id="cliServico"
           type="text"
@@ -646,153 +781,341 @@ footer small{
 
 <script>
 
-/* VERSÃO 7 DA IMPLANTAÇÃO */
-const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbx7yCVA3WfmjckTHnUu0QicJaEw5oPiziQsTpRTiH6d6LZsrl7MNT7S9jFCNFqy97Mb/exec";
+/* VERSÃO 8 DA IMPLANTAÇÃO */
+
+const URL_APPS_SCRIPT =
+"https://script.google.com/macros/s/AKfycbx7yCVA3WfmjckTHnUu0QicJaEw5oPiziQsTpRTiH6d6LZsrl7MNT7S9jFCNFqy97Mb/exec";
 
 
-/* CADASTRO PROFISSIONAL */
+/* ================================
+   PROFISSÕES CLICÁVEIS
+================================ */
 
-document.getElementById("formProfissional").addEventListener("submit", async function(event){
+function selecionarServico(servico){
+
+  document.getElementById("buscaServico").value = servico;
+
+  document.getElementById("buscar").scrollIntoView({
+    behavior:"smooth"
+  });
+
+  setTimeout(function(){
+
+    buscarProfissionais();
+
+  },400);
+
+}
+
+
+/* ================================
+   CADASTRO PROFISSIONAL
+================================ */
+
+document
+.getElementById("formProfissional")
+.addEventListener("submit", async function(event){
 
   event.preventDefault();
 
   const dados = {
+
     tipo: "PROFISSIONAL",
-    nome: document.getElementById("profNome").value,
-    whatsapp: document.getElementById("profWhats").value,
-    cidade: document.getElementById("profCidade").value,
-    bairro: document.getElementById("profBairro").value,
-    servico: document.getElementById("profServico").value,
-    descricao: document.getElementById("profDescricao").value
+
+    nome:
+    document.getElementById("profNome").value,
+
+    whatsapp:
+    document.getElementById("profWhats").value,
+
+    cidade:
+    document.getElementById("profCidade").value,
+
+    bairro:
+    document.getElementById("profBairro").value,
+
+    servico:
+    document.getElementById("profServico").value,
+
+    descricao:
+    document.getElementById("profDescricao").value
+
   };
 
-  try {
+  try{
 
-    await fetch(URL_APPS_SCRIPT, {
-      method: "POST",
-      mode: "no-cors",
-      body: JSON.stringify(dados)
+    await fetch(URL_APPS_SCRIPT,{
+
+      method:"POST",
+
+      mode:"no-cors",
+
+      body:JSON.stringify(dados)
+
     });
 
-    document.getElementById("sucessoProfissional").style.display = "block";
+    document
+    .getElementById("sucessoProfissional")
+    .style.display="block";
 
     this.reset();
 
-  } catch (erro) {
+  }catch(erro){
 
-    alert("Não foi possível enviar o cadastro. Tente novamente.");
+    alert(
+      "Não foi possível enviar o cadastro. Tente novamente."
+    );
 
   }
 
 });
 
 
-/* CADASTRO CLIENTE */
+/* ================================
+   CANCELAMENTO DO PERFIL
+================================ */
 
-document.getElementById("formCliente").addEventListener("submit", async function(event){
+document
+.getElementById("formCancelamento")
+.addEventListener("submit", async function(event){
 
   event.preventDefault();
 
   const dados = {
-    tipo: "CLIENTE",
-    nome: document.getElementById("cliNome").value,
-    whatsapp: document.getElementById("cliWhats").value,
-    cidade: document.getElementById("cliCidade").value,
-    bairro: document.getElementById("cliBairro").value,
-    servico: document.getElementById("cliServico").value,
-    descricao: document.getElementById("cliDescricao").value
+
+    tipo:"CANCELAR",
+
+    nome:
+    document.getElementById("cancelNome").value,
+
+    whatsapp:
+    document.getElementById("cancelWhats").value
+
   };
 
-  try {
+  try{
 
-    await fetch(URL_APPS_SCRIPT, {
-      method: "POST",
-      mode: "no-cors",
-      body: JSON.stringify(dados)
+    await fetch(URL_APPS_SCRIPT,{
+
+      method:"POST",
+
+      mode:"no-cors",
+
+      body:JSON.stringify(dados)
+
     });
 
-    document.getElementById("sucessoCliente").style.display = "block";
+    document
+    .getElementById("sucessoCancelamento")
+    .style.display="block";
 
     this.reset();
 
-  } catch (erro) {
+  }catch(erro){
 
-    alert("Não foi possível enviar a solicitação. Tente novamente.");
+    alert(
+      "Não foi possível processar o cancelamento. Tente novamente."
+    );
 
   }
 
 });
 
 
-/* BUSCAR PROFISSIONAIS */
+/* ================================
+   CADASTRO CLIENTE
+================================ */
+
+document
+.getElementById("formCliente")
+.addEventListener("submit", async function(event){
+
+  event.preventDefault();
+
+  const dados = {
+
+    tipo:"CLIENTE",
+
+    nome:
+    document.getElementById("cliNome").value,
+
+    whatsapp:
+    document.getElementById("cliWhats").value,
+
+    cidade:
+    document.getElementById("cliCidade").value,
+
+    bairro:
+    document.getElementById("cliBairro").value,
+
+    servico:
+    document.getElementById("cliServico").value,
+
+    descricao:
+    document.getElementById("cliDescricao").value
+
+  };
+
+  try{
+
+    await fetch(URL_APPS_SCRIPT,{
+
+      method:"POST",
+
+      mode:"no-cors",
+
+      body:JSON.stringify(dados)
+
+    });
+
+    document
+    .getElementById("sucessoCliente")
+    .style.display="block";
+
+    this.reset();
+
+  }catch(erro){
+
+    alert(
+      "Não foi possível enviar a solicitação. Tente novamente."
+    );
+
+  }
+
+});
+
+
+/* ================================
+   BUSCAR PROFISSIONAIS
+================================ */
 
 async function buscarProfissionais(){
 
-  const cidade = document.getElementById("buscaCidade").value.trim();
-  const servico = document.getElementById("buscaServico").value.trim();
+  const cidade =
+  document
+  .getElementById("buscaCidade")
+  .value
+  .trim();
 
-  const resultado = document.getElementById("resultadoProfissionais");
+  const servico =
+  document
+  .getElementById("buscaServico")
+  .value
+  .trim();
+
+  const resultado =
+  document
+  .getElementById("resultadoProfissionais");
+
 
   if(!cidade && !servico){
 
     resultado.innerHTML =
-      '<div class="resultado-vazio">Digite uma cidade ou um serviço para pesquisar.</div>';
+    '<div class="resultado-vazio">' +
+    'Digite uma cidade ou um serviço para pesquisar.' +
+    '</div>';
 
     return;
+
   }
 
+
   resultado.innerHTML =
-    '<div class="resultado-vazio">🔎 Procurando profissionais...</div>';
+  '<div class="resultado-vazio">' +
+  '🔎 Procurando profissionais...' +
+  '</div>';
+
 
   try{
 
     const resposta = await fetch(
+
       URL_APPS_SCRIPT +
+
       "?acao=buscar" +
-      "&cidade=" + encodeURIComponent(cidade) +
-      "&servico=" + encodeURIComponent(servico)
+
+      "&cidade=" +
+      encodeURIComponent(cidade) +
+
+      "&servico=" +
+      encodeURIComponent(servico)
+
     );
 
+
     if(!resposta.ok){
-      throw new Error("Erro na resposta do servidor");
+
+      throw new Error(
+        "Erro na resposta do servidor"
+      );
+
     }
 
-    const profissionais = await resposta.json();
+
+    const profissionais =
+    await resposta.json();
+
 
     if(!profissionais.length){
 
       resultado.innerHTML =
-        '<div class="resultado-vazio">😕 Nenhum profissional encontrado com esses dados.</div>';
+      '<div class="resultado-vazio">' +
+      '😕 Nenhum profissional encontrado com esses dados.' +
+      '</div>';
 
       return;
+
     }
+
 
     resultado.innerHTML = "";
 
+
     profissionais.forEach(function(prof){
 
-      const card = document.createElement("div");
+      const card =
+      document.createElement("div");
 
-      card.className = "profissional-card";
+      card.className =
+      "profissional-card";
+
 
       const whatsappLimpo =
-        String(prof.whatsapp || "").replace(/\D/g,"");
+      String(
+        prof.whatsapp || ""
+      ).replace(/\D/g,"");
+
 
       const numero =
-        whatsappLimpo.startsWith("55")
-        ? whatsappLimpo
-        : "55" + whatsappLimpo;
+      whatsappLimpo.startsWith("55")
+      ? whatsappLimpo
+      : "55" + whatsappLimpo;
+
 
       card.innerHTML = `
-        <h3>👷 ${prof.nome || "Profissional"}</h3>
 
-        <p><strong>🛠️ Serviço:</strong> ${prof.servico || ""}</p>
+        <h3>
+          👷 ${prof.nome || "Profissional"}
+        </h3>
 
-        <p><strong>📍 Cidade:</strong> ${prof.cidade || ""}</p>
+        <p>
+          <strong>🛠️ Serviço:</strong>
+          ${prof.servico || ""}
+        </p>
 
-        <p><strong>🏘️ Bairro:</strong> ${prof.bairro || "Não informado"}</p>
+        <p>
+          <strong>📍 Cidade:</strong>
+          ${prof.cidade || ""}
+        </p>
 
-        <p>${prof.descricao || ""}</p>
+        <p>
+          <strong>🏘️ Bairro:</strong>
+          ${prof.bairro || "Não informado"}
+        </p>
+
+        <p>
+          ${prof.descricao || ""}
+        </p>
 
         <a
           class="whatsapp"
@@ -801,18 +1124,23 @@ async function buscarProfissionais(){
         >
           💬 Falar pelo WhatsApp
         </a>
+
       `;
+
 
       resultado.appendChild(card);
 
     });
+
 
   }catch(erro){
 
     console.error(erro);
 
     resultado.innerHTML =
-      '<div class="resultado-vazio">⚠️ Não foi possível realizar a pesquisa agora.</div>';
+    '<div class="resultado-vazio">' +
+    '⚠️ Não foi possível realizar a pesquisa agora.' +
+    '</div>';
 
   }
 
