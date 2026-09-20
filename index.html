@@ -122,12 +122,6 @@ header{
   border:2px solid var(--g);
 }
 
-.danger{
-  background:#fff;
-  color:#a33a3a;
-  border:2px solid #d99a9a;
-}
-
 section{
   padding:48px 0;
 }
@@ -255,12 +249,6 @@ form .btn{
   font-weight:700;
 }
 
-.cancel-success{
-  background:#fff4e5;
-  border-color:#efd29a;
-  color:#795514;
-}
-
 .profissionais-box{
   margin-top:25px;
 }
@@ -300,12 +288,6 @@ form .btn{
   border-radius:12px;
   color:#65726d;
   margin-top:15px;
-}
-
-.cancelamento{
-  margin-top:25px;
-  padding-top:25px;
-  border-top:1px solid var(--line);
 }
 
 footer{
@@ -616,57 +598,6 @@ footer small{
         a estrutura da plataforma.
       </div>
 
-      <!-- CANCELAMENTO -->
-
-      <div class="cancelamento">
-
-        <h3>🚫 Quero cancelar meu perfil</h3>
-
-        <p class="sub">
-          Se você não quiser mais aparecer nas buscas do Deu Jeito,
-          solicite aqui a desativação do seu perfil.
-        </p>
-
-        <form id="formCancelamento">
-
-          <label for="cancelNome">
-            Nome usado no cadastro
-          </label>
-
-          <input
-            id="cancelNome"
-            type="text"
-            placeholder="Seu nome"
-            required
-          >
-
-          <label for="cancelWhats">
-            WhatsApp usado no cadastro
-          </label>
-
-          <input
-            id="cancelWhats"
-            type="tel"
-            placeholder="(31) 99999-9999"
-            required
-          >
-
-          <button type="submit" class="btn danger">
-            🚫 Quero cancelar meu perfil
-          </button>
-
-        </form>
-
-        <div id="sucessoCancelamento"
-             class="success cancel-success">
-
-          ✅ Solicitação processada.
-          Seu perfil foi retirado das buscas do Deu Jeito.
-
-        </div>
-
-      </div>
-
     </div>
 
   </div>
@@ -782,8 +713,6 @@ footer small{
 
 <script>
 
-/* VERSÃO 8 DA IMPLANTAÇÃO */
-
 const URL_APPS_SCRIPT =
 "https://script.google.com/macros/s/AKfycbwkB2VoSB9JFHhfzAd0_RtzD7OfzQ37G8D_sHolS0m2XS-NI66dp36fmTwuOWGQBLaX/exec";
 
@@ -865,57 +794,6 @@ document
 
     alert(
       "Não foi possível enviar o cadastro. Tente novamente."
-    );
-
-  }
-
-});
-
-
-/* ================================
-   CANCELAMENTO DO PERFIL
-================================ */
-
-document
-.getElementById("formCancelamento")
-.addEventListener("submit", async function(event){
-
-  event.preventDefault();
-
-  const dados = {
-
-    tipo:"CANCELAR",
-
-    nome:
-    document.getElementById("cancelNome").value,
-
-    whatsapp:
-    document.getElementById("cancelWhats").value
-
-  };
-
-  try{
-
-    await fetch(URL_APPS_SCRIPT,{
-
-      method:"POST",
-
-      mode:"no-cors",
-
-      body:JSON.stringify(dados)
-
-    });
-
-    document
-    .getElementById("sucessoCancelamento")
-    .style.display="block";
-
-    this.reset();
-
-  }catch(erro){
-
-    alert(
-      "Não foi possível processar o cancelamento. Tente novamente."
     );
 
   }
